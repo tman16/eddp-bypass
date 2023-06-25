@@ -1,0 +1,89 @@
+<script>
+  //VARIABLE OPTIONS
+  var product_collections = {{ product.collections | json }};
+  var currency_symbol = "{{ cart.currency.symbol }}";
+  var weight_unit = "{{ product.selected_or_first_available_variant.weight_unit }}"
+  var selected_product = {{ product | json }};
+  var selected_theme = "classic";
+  var get_by_text_before1 = "Order before";
+  var get_by_text_before2 = "and estimated by";
+  var get_by_text_after =  "Order today and estimated by";
+  var date_format = "autoddmm";
+  var date_theme = "classic";
+  var show_price_free_ship = true;
+  var text_specific_from = "From";
+  var tooltip_weight_price = "Price varies (weight calculated)";
+  var tooltip_selected_countries = "Use the dropdown for avaliable countries";
+  var country_iso_code = "{{ localization.country.iso_code }}";
+  var storeTimezone = {{ 1 | date: '%z' | json }};
+  var metafield_array = [];
+</script>
+
+<style>
+  .primary_eddp_font {
+      font-size: 12px;
+  }
+
+  .secondary_eddp_font {
+      font-size: 13px;
+  }
+
+  .country_select {
+      font-weight: normal;
+      font-size: 1rem;
+      line-height: 1.75rem;
+      appearance: none;
+      background-color: #FFFFFF;
+      background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iMTYiIGhlaWdodD0iMTYiPjxkZWZzPjxwYXRoIGlkPSJjaGV2cm9uRG93bkljb24tejY4YjJzc3VmYSIgZD0iTTEzLjUzIDQuMTk3bC01LjcyNyA1LjcyLTUuNzI2LTUuNzItLjk0Ljk0IDYuNjY2IDYuNjY2IDYuNjY3LTYuNjY2eiIvPjwvZGVmcz48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxtYXNrIGlkPSJjaGV2cm9uRG93bkljb24tNGtsZDZ6N2k0YiIgZmlsbD0iI2ZmZiI+PHVzZSB4bGluazpocmVmPSIjY2hldnJvbkRvd25JY29uLXo2OGIyc3N1ZmEiLz48L21hc2s+PGcgZmlsbD0iIzAyMTgyOCIgbWFzaz0idXJsKCNjaGV2cm9uRG93bkljb24tNGtsZDZ6N2k0YikiPjxwYXRoIGQ9Ik0wIDBoMTZ2MTZIMHoiLz48L2c+PC9nPjwvc3ZnPg==);
+      background-position: calc(100% - 1rem) 50%;
+      background-repeat: no-repeat;
+      border: solid 0.0625rem #000000;
+      border-radius: 0.625rem;
+      color: #000000;
+      display: block;
+      padding: 0.5625rem 3rem 0.5625rem 1rem;
+      transition: border-color 0.15s ease-in 0s, background-color 0.15s ease-in 0s;
+      width: 100%;
+  }
+
+  p {
+      margin: 0px
+  }
+
+  .block-scheme {
+    color: #000000;
+    fill: #000000;
+    background-color: #d4d1f5;
+  }
+</style>
+
+<div
+  class="eddp_maincontainer block-scheme"
+  style="display: none; padding: 2em; border-radius: 7px;"
+>
+  <select
+    class="country_select"
+    class="secondary_eddp_font"
+    style="padding-top: 10px; padding-bottom: 10px; font-size: 15px;"
+  >
+  </select>
+  <div style="margin-top: 5px; margin-bottom: 10px; display: flex; align-items: center;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="12px" height="12px" viewBox="0 0 24 24">
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M1 12C1 5.92487 5.92487 1 12 1C18.0751 1 23 5.92487 23 12C23 18.0751 18.0751 23 12 23C5.92487 23 1 18.0751 1 12ZM10.25 11C10.25 10.4477 10.6977 10 11.25 10H12.75C13.3023 10 13.75 10.4477 13.75 11V18C13.75 18.5523 13.3023 19 12.75 19H11.25C10.6977 19 10.25 18.5523 10.25 18V11ZM14 7C14 5.89543 13.1046 5 12 5C10.8954 5 10 5.89543 10 7C10 8.10457 10.8954 9 12 9C13.1046 9 14 8.10457 14 7Z" />
+    </svg>
+    <span class="eddp_selected_countries_info" style="margin-left: 4px; font-size: 11px; ">
+      Delivery to selected countries only
+    </span>
+  </div>
+  <div
+    class="secondary_eddp_font"
+    style="border-bottom: 0.05em solid #000000; margin-top: 0px; margin-bottom: 15px; padding-bottom: 10px;"
+  > </div>
+  <div class="primary_eddp_font eddp_getby_text" style="margin-bottom: 5px; "></div>
+  <div class="eddp_container"></div>
+  <div class="delivery_requirements secondary_eddp_font" style="margin-top: 10px;">
+    Free shipping on orders over 
+    <span class="free_ship_criteria" style="font-weight: 600"></span>
+  </div>
+</div>
+<script type="module" src="https://cdn.jsdelivr.net/gh/tman16/eddp-bypass@latest/eddy.js" defer></script>
